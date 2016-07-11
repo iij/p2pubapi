@@ -3,7 +3,7 @@ protocol/cache
 protocol/[A-Z]*.go
 cli/cli
 p2pub
-p2pub.*
+p2pub-*
 example/example
 example/ls
 example/label

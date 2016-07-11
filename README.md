@@ -2,7 +2,7 @@
 
 ## Install
 
-- go get github.com/iij/p2pubapi
+- go get -u github.com/iij/p2pubapi
 - go build -o p2pub github.com/iij/p2pubapi/cli
 - install -c p2pub /usr/local/bin/p2pub
 
