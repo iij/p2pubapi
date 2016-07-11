@@ -184,6 +184,13 @@ func main() {
 				}
 				return nil
 			},
+		}, {
+			Name:    "exit",
+			Aliases: []string{"quit", "q"},
+			Hidden:  true,
+			Action: func(c *cli.Context) error {
+				return fmt.Errorf("exit")
+			},
 		},
 	}
 	for _, p := range protocol.APIlist {
