@@ -331,9 +331,9 @@ func lsarchive(c *cli.Context) error {
 	}
 	w := new(tabwriter.Writer)
 	w.Init(os.Stdout, 8, 0, 2, ' ', 0)
-	fmt.Fprintln(w, "Type\tStatus\tImageId\tSize\tParent\tOS\tDateTime")
+	fmt.Fprintln(w, "Type\tName\tStatus\tImageId\tSize\tParent\tOS\tDateTime")
 	for _, i := range res.ImageList {
-		fmt.Fprintf(w, "%s\t%s\t%s\t%s\t%s\t%s\t%s\n", i.Type, i.Status, i.ImageId, i.ImageSize, i.SrcServiceCode, i.OSType, i.ArchivedDateTime)
+		fmt.Fprintf(w, "%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n", i.Type, i.Label, i.Status, i.ImageId, i.ImageSize, i.SrcServiceCode, i.OSType, i.ArchivedDateTime)
 	}
 	w.Flush()
 	return nil
