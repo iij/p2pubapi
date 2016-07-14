@@ -2,6 +2,7 @@
 package main
 
 import (
+	"bufio"
 	"encoding/json"
 	"fmt"
 	"os"
@@ -12,6 +13,7 @@ import (
 	"gopkg.in/yaml.v1"
 
 	log "github.com/Sirupsen/logrus"
+	"github.com/mattn/go-shellwords"
 
 	"github.com/iij/p2pubapi"
 	"github.com/iij/p2pubapi/protocol"
@@ -148,7 +150,7 @@ func main() {
 	app.Commands = []cli.Command{
 		{
 			Name:    "setenv",
-			Aliases: []string{"set"},
+			Aliases: []string{"set", "export"},
 			Usage:   "set environment variable",
 			Action: func(ctxt *cli.Context) error {
 				args := ctxt.Args()
@@ -156,26 +158,31 @@ func main() {
 					log.Error("require arguments")
 					return fmt.Errorf("require arguments")
 				}
-				k := args.First()
-				preval := os.Getenv(k)
-				if args.Get(1) == "" {
-					os.Unsetenv(k)
-					log.Infof("%s = %s -> (unset)", args.First(), preval)
-				} else {
-					os.Setenv(k, args.Get(1))
-					log.Infof("%s = %s -> %s", args.First(), preval, os.Getenv(k))
+				for _, v := range args {
+					tmp := strings.SplitN(v, "=", 2)
+					if len(tmp) == 1 {
+						log.Debugf("set %s=%s", tmp[0], os.Getenv(tmp[0]))
+					} else {
+						oldval := os.Getenv(tmp[0])
+						if tmp[1] == "" {
+							log.Debugf("%s = %s -> (unset)", tmp[0], oldval)
+						} else {
+							os.Setenv(tmp[0], tmp[1])
+							log.Debugf("%s = %s -> %s", tmp[0], oldval, os.Getenv(tmp[0]))
+						}
+					}
 				}
 				return nil
 			},
 		}, {
 			Name:    "getenv",
-			Aliases: []string{"get"},
+			Aliases: []string{"get", "env"},
 			Usage:   "get environment variable",
 			Action: func(ctxt *cli.Context) error {
 				args := ctxt.Args()
 				if args.Present() {
 					for _, k := range append([]string{args.First()}, args.Tail()...) {
-						log.Infof("%s=%s", k, os.Getenv(k))
+						log.Infof("set %s=%s", k, os.Getenv(k))
 					}
 				} else {
 					for _, k := range os.Environ() {
@@ -190,6 +197,30 @@ func main() {
 			Hidden:  true,
 			Action: func(c *cli.Context) error {
 				return fmt.Errorf("exit")
+			},
+		}, {
+			Name:    "source",
+			Aliases: []string{".", "exec"},
+			Action: func(c *cli.Context) error {
+				for _, k := range c.Args() {
+					if fp, err := os.Open(k); err == nil {
+						defer fp.Close()
+						scanner := bufio.NewScanner(fp)
+						for scanner.Scan() {
+							var tokens []string
+							tokens, err = shellwords.Parse(scanner.Text())
+							log.Debug("execute ", tokens)
+							if err = app.Run(append([]string{tokens[0]}, tokens...)); err != nil {
+								log.Error("cmd error:", err)
+								return err
+							}
+						}
+					} else {
+						log.Error("open error:", err)
+						return err
+					}
+				}
+				return nil
 			},
 		},
 	}
