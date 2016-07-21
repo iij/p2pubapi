@@ -100,7 +100,7 @@ func GetCLI(arg protocol.CommonArg) cli.Command {
 	res := cli.Command{}
 	res.Name = arg.APIName()
 	res.Aliases = []string{shortname(res.Name), arg.JPName()}
-	res.Usage = ""
+	res.Usage = arg.JPName()
 	res.Description = fmt.Sprintf("calls %s API\n    %s %s\n    see: %s (%s)\n", arg.APIName(), arg.Method(), arg.URI(), arg.Document(), arg.JPName())
 	res.Action = cmdfunc
 	req, opt := p2pubapi.ArgumentList(arg)
@@ -118,6 +118,9 @@ func GetCLI(arg protocol.CommonArg) cli.Command {
 	for _, o := range opt {
 		flg := cli.StringFlag{}
 		flg.Name = fmt.Sprintf("%s", o)
+		if strings.HasSuffix(flg.Name, "ServiceCode") {
+			flg.Name = flg.Name + "," + strings.TrimSuffix(flg.Name, "ServiceCode")
+		}
 		flg.EnvVar = toEnv(o)
 		flg.Usage = "optional"
 		res.Flags = append(res.Flags, flg)
