@@ -9,6 +9,8 @@ example/ls
 example/label
 example/pubkey
 example/vmpower-on
+example/cancel
+example/ipof
 *.bak
 *~
 *.swp
