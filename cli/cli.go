@@ -8,6 +8,7 @@ import (
 	"os"
 	"reflect"
 	"strings"
+	"time"
 	"unicode"
 
 	"gopkg.in/yaml.v1"
@@ -124,6 +125,58 @@ func GetCLI(arg protocol.CommonArg) cli.Command {
 	return res
 }
 
+func string2status(s string) p2pubapi.Status {
+	switch strings.ToLower(s) {
+	default:
+		return p2pubapi.None
+	case strings.ToLower(p2pubapi.InPreparation.String()):
+		return p2pubapi.InPreparation
+	case strings.ToLower(p2pubapi.InService.String()):
+		return p2pubapi.InService
+	case strings.ToLower(p2pubapi.Stopped.String()):
+		return p2pubapi.Stopped
+	case strings.ToLower(p2pubapi.Configuring.String()):
+		return p2pubapi.Configuring
+	case strings.ToLower(p2pubapi.Starting.String()):
+		return p2pubapi.Starting
+	case strings.ToLower(p2pubapi.Running.String()):
+		return p2pubapi.Running
+	case strings.ToLower(p2pubapi.Stopping.String()):
+		return p2pubapi.Stopping
+	case strings.ToLower(p2pubapi.Locked.String()):
+		return p2pubapi.Locked
+	case strings.ToLower(p2pubapi.Attached.String()):
+		return p2pubapi.Attached
+	case strings.ToLower(p2pubapi.NotAttached.String()):
+		return p2pubapi.NotAttached
+	case strings.ToLower(p2pubapi.Initializing.String()):
+		return p2pubapi.Initializing
+	case strings.ToLower(p2pubapi.Archiving.String()):
+		return p2pubapi.Archiving
+	case strings.ToLower(p2pubapi.Initialized.String()):
+		return p2pubapi.Initialized
+	case strings.ToLower(p2pubapi.Configured.String()):
+		return p2pubapi.Configured
+	case strings.ToLower(p2pubapi.Updating.String()):
+		return p2pubapi.Updating
+	}
+}
+
+func getwaitinfo(arg []string) (scode string, cst, sst p2pubapi.Status) {
+	scode = arg[0]
+	cst = p2pubapi.None
+	sst = p2pubapi.None
+	for _, v := range arg[1:len(arg)] {
+		st := string2status(v)
+		if st == p2pubapi.InPreparation || st == p2pubapi.InService {
+			cst = st
+		} else {
+			sst = st
+		}
+	}
+	return
+}
+
 func main() {
 	app := cli.NewApp()
 	app.EnableBashCompletion = true
@@ -221,6 +274,69 @@ func main() {
 					}
 				}
 				return nil
+			},
+		}, {
+			Name:    "waitVM",
+			Aliases: []string{"waitvm", "vmwait", "wait"},
+			Flags: []cli.Flag{
+				cli.StringFlag{
+					Name:   "GisServiceCode,Gis",
+					EnvVar: "GISSERVICECODE,GisServiceCode",
+				},
+			},
+			Action: func(c *cli.Context) error {
+				arg := c.Args()
+				if len(arg) == 0 {
+					log.Error("Usage: waitVM --GisServiceCode gisXXXXXXXX ivmXXXXXXXX [contractStatus] [vmStatus]")
+					return fmt.Errorf("Usage: waitVM --GisServiceCode gisXXXXXXXX ivmXXXXXXXX [contractStatus] [vmStatus]")
+				}
+				ivm, cst, sst := getwaitinfo(arg)
+				api := p2pubapi.NewAPI(c.GlobalString("AccessKey"), c.GlobalString("SecretKey"))
+				gis := c.String("GisServiceCode")
+				res := p2pubapi.WaitVM(api, gis, ivm, cst, sst, time.Duration(10*time.Minute))
+				return res
+			},
+		}, {
+			Name:    "waitSystemStorage",
+			Aliases: []string{"waitsst", "sstwait"},
+			Flags: []cli.Flag{
+				cli.StringFlag{
+					Name:   "GisServiceCode,Gis",
+					EnvVar: "GISSERVICECODE,GisServiceCode",
+				},
+			},
+			Action: func(c *cli.Context) error {
+				arg := c.Args()
+				if len(arg) == 0 {
+					log.Error("Usage: waitSystemStorage --GisServiceCode gisXXXXXXXX ibaXXXXXXXX [contractStatus] [ibaStatus]")
+					return fmt.Errorf("Usage: waitSystemStorage --GisServiceCode gisXXXXXXXX ibaXXXXXXXX [contractStatus] [ibaStatus]")
+				}
+				iba, cst, sst := getwaitinfo(arg)
+				api := p2pubapi.NewAPI(c.GlobalString("AccessKey"), c.GlobalString("SecretKey"))
+				gis := c.String("GisServiceCode")
+				res := p2pubapi.WaitSystemStorage(api, gis, iba, cst, sst, time.Duration(10*time.Minute))
+				return res
+			},
+		}, {
+			Name:    "waitDataStorage",
+			Aliases: []string{"waitst", "stwait"},
+			Flags: []cli.Flag{
+				cli.StringFlag{
+					Name:   "GisServiceCode,Gis",
+					EnvVar: "GISSERVICECODE,GisServiceCode",
+				},
+			},
+			Action: func(c *cli.Context) error {
+				arg := c.Args()
+				if len(arg) == 0 {
+					log.Error("Usage: waitDataStorage --GisServiceCode gisXXXXXXXX i??XXXXXXXX [contractStatus] [ibaStatus]")
+					return fmt.Errorf("Usage: waitSystemStorage --GisServiceCode gisXXXXXXXX i??XXXXXXXX [contractStatus] [ibaStatus]")
+				}
+				iba, cst, sst := getwaitinfo(arg)
+				api := p2pubapi.NewAPI(c.GlobalString("AccessKey"), c.GlobalString("SecretKey"))
+				gis := c.String("GisServiceCode")
+				res := p2pubapi.WaitDataStorage(api, gis, iba, cst, sst, time.Duration(10*time.Minute))
+				return res
 			},
 		},
 	}
