@@ -6,6 +6,7 @@ import (
 	"crypto/hmac"
 	"crypto/sha1"
 	"crypto/sha256"
+	"crypto/tls"
 	"encoding/base64"
 	"encoding/json"
 	"fmt"
@@ -38,6 +39,7 @@ type API struct {
 	Endpoint   string
 	SignMethod string
 	Expires    time.Duration
+	Insecure   bool
 }
 
 // NewAPI API構造体のコンストラクタ
@@ -127,6 +129,12 @@ func (a API) Get(param url.URL) (resp *http.Response, err error) {
 // PostSome : low-level Call
 func (a API) PostSome(method string, param url.URL, body interface{}) (resp *http.Response, err error) {
 	cl := http.Client{}
+	if a.Insecure {
+		tr := &http.Transport{
+			TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
+		}
+		cl.Transport = tr
+	}
 	log.Debug("param", param)
 	var buf *bytes.Buffer
 	if body != nil {

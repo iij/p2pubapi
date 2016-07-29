@@ -36,7 +36,7 @@ func GetPath(arg protocol.CommonArg) string {
 
 // GetParam APIのクエリストリング部分を求める
 func GetParam(api API, arg protocol.CommonArg) *url.URL {
-	param, err := url.Parse(EndpointJSON)
+	param, err := url.Parse(api.Endpoint)
 	if err != nil {
 		panic(err)
 	}
@@ -193,7 +193,7 @@ func CallWithMap(api API, name string, data map[string]string, resp map[string]i
 	argt := protocol.TypeMap[name]
 	arg := reflect.Zero(argt).Interface().(protocol.CommonArg)
 	var res *http.Response
-	param, err := url.Parse(EndpointJSON)
+	param, err := url.Parse(api.Endpoint)
 	if err != nil {
 		panic(err)
 	}
