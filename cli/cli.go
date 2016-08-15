@@ -63,6 +63,8 @@ func cmdfunc(c *cli.Context) error {
 	}
 	log.Debugf("data: %#+v", data)
 	api := p2pubapi.NewAPI(c.GlobalString("AccessKey"), c.GlobalString("SecretKey"))
+	api.Endpoint = c.GlobalString("Endpoint")
+	api.Insecure = c.GlobalBool("Insecure")
 	var resp = map[string]interface{}{}
 	if err := p2pubapi.ValidateMap(c.Command.Name, data); err != nil {
 		log.Error(err)
@@ -185,6 +187,17 @@ func main() {
 	app.EnableBashCompletion = true
 	app.Version = version
 	app.Flags = []cli.Flag{
+		cli.StringFlag{
+			Name:   "Endpoint",
+			EnvVar: "IIJAPI_ENDPOINT",
+			Value:  p2pubapi.EndpointJSON,
+			Hidden: true,
+		},
+		cli.BoolFlag{
+			Name:   "Insecure",
+			EnvVar: "IIJAPI_INSECURE",
+			Hidden: true,
+		},
 		cli.StringFlag{
 			Name:   "AccessKey",
 			EnvVar: "IIJAPI_ACCESS_KEY",
