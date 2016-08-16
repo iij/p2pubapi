@@ -37,6 +37,13 @@ func toEnv(s string) string {
 	return strings.ToUpper(s)
 }
 
+func getAPI(c *cli.Context) (api *p2pubapi.API) {
+	api = p2pubapi.NewAPI(c.GlobalString("AccessKey"), c.GlobalString("SecretKey"))
+	api.Endpoint = c.GlobalString("Endpoint")
+	api.Insecure = c.GlobalBool("Insecure")
+	return
+}
+
 func cmdfunc(c *cli.Context) error {
 	if c.GlobalBool("verbose") {
 		log.SetLevel(log.DebugLevel)
@@ -62,9 +69,7 @@ func cmdfunc(c *cli.Context) error {
 		data[i] = val
 	}
 	log.Debugf("data: %#+v", data)
-	api := p2pubapi.NewAPI(c.GlobalString("AccessKey"), c.GlobalString("SecretKey"))
-	api.Endpoint = c.GlobalString("Endpoint")
-	api.Insecure = c.GlobalBool("Insecure")
+	api := getAPI(c)
 	var resp = map[string]interface{}{}
 	if err := p2pubapi.ValidateMap(c.Command.Name, data); err != nil {
 		log.Error(err)
@@ -87,6 +92,7 @@ func cmdfunc(c *cli.Context) error {
 	case "pretty":
 		if b, err := json.MarshalIndent(resp, "", "  "); err == nil {
 			os.Stdout.Write(b)
+			os.Stdout.WriteString("\n")
 		} else {
 			log.Error(err)
 		}
@@ -312,7 +318,7 @@ func main() {
 					return fmt.Errorf("Usage: waitVM ivmXXXXXXXX [contractStatus] [vmStatus]")
 				}
 				ivm, cst, sst := getwaitinfo(arg)
-				api := p2pubapi.NewAPI(c.GlobalString("AccessKey"), c.GlobalString("SecretKey"))
+				api := getAPI(c)
 				gis := c.String("GisServiceCode")
 				res := p2pubapi.WaitVM(api, gis, ivm, cst, sst, c.Duration("duration"))
 				return res
@@ -328,7 +334,7 @@ func main() {
 					return fmt.Errorf("Usage: waitSystemStorage ibaXXXXXXXX [contractStatus] [ibaStatus]")
 				}
 				iba, cst, sst := getwaitinfo(arg)
-				api := p2pubapi.NewAPI(c.GlobalString("AccessKey"), c.GlobalString("SecretKey"))
+				api := getAPI(c)
 				gis := c.String("GisServiceCode")
 				res := p2pubapi.WaitSystemStorage(api, gis, iba, cst, sst, c.Duration("duration"))
 				return res
@@ -344,7 +350,7 @@ func main() {
 					return fmt.Errorf("Usage: waitSystemStorage i??XXXXXXXX [contractStatus] [ibaStatus]")
 				}
 				iba, cst, sst := getwaitinfo(arg)
-				api := p2pubapi.NewAPI(c.GlobalString("AccessKey"), c.GlobalString("SecretKey"))
+				api := getAPI(c)
 				gis := c.String("GisServiceCode")
 				res := p2pubapi.WaitDataStorage(api, gis, iba, cst, sst, c.Duration("duration"))
 				return res
