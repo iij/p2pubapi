@@ -7,9 +7,9 @@ import (
 // UserDataSet システムストレージ ユーザーデータ設定
 // http://manual.iij.jp/p2/pubapi/137048177.html
 type UserDataSet struct {
-	GisServiceCode string `json:"-"` // P2契約のサービスコード(gis########)
-	IbaServiceCode string `json:"-"` 
-	UserData       string
+	GisServiceCode string `json:"-"` // ユーザデータを設定する仮想サーバが所属するgisのサービスコード(gis########)
+	IbaServiceCode string `json:"-"` // ユーザデータを設定するシステムストレージのサービスコード(iar########)
+	UserData       string // base64エンコードされたユーザデータ
 }
 
 // URI /{{.GisServiceCode}}/system-storages/{{.IbaServiceCode}}/user-data.json

@@ -7,8 +7,8 @@ import (
 // UserDataGet システムストレージ ユーザーデータ設定
 // http://manual.iij.jp/p2/pubapi/137048177.html
 type UserDataGet struct {
-	GisServiceCode string `json:"-"` // P2契約のサービスコード(gis########)
-	IbaServiceCode string `json:"-"`
+	GisServiceCode string `json:"-"` // ユーザデータを設定されているシステムストレージが所属するgisのサービスコード(gis########)
+	IbaServiceCode string `json:"-"` // 起動するシステムストレージのサービスコード(iar########)
 }
 
 // URI /{{.GisServiceCode}}/system-storages/{{.IbaServiceCode}}/user-data.json
@@ -43,6 +43,5 @@ func init() {
 // UserDataGetResponse
 type UserDataGetResponse struct {
 	*CommonResponse
-	UserData  string `json:",omitempty"`
+	UserData  string `json:",omitempty"` // base64エンコードされたユーザデータ
 }
-

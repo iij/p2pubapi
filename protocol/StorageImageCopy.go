@@ -7,12 +7,12 @@ import (
 // StorageImageCopy ストレージイメージコピー
 //  http://manual.iij.jp/p2/pubapi/137048215.html
 type StorageImageCopy struct {
-	SrcGisServiceCode string `json:"-"` // P2契約のサービスコード(gis########)
-	SrcIarServiceCode string `json:"-"`
-	SrcImageId        string `json:"-"`
-	DstGisServiceCode string `json:"GisServiceCode"`
-	DstIarServiceCode string `json:"IarServiceCode"`
-	Image             string 
+	SrcGisServiceCode string `json:"-"` // 操作対象が所属するgisのサービスコード(gis########)
+	SrcIarServiceCode string `json:"-"` // 操作対象となるイメージが所属するストレージアーカイブのサービスコード(iar########)
+	SrcImageId        string `json:"-"` // 操作対象となるイメージのID
+	DstGisServiceCode string `json:"GisServiceCode"` // コピー先のgisのサービスコード(gis########)
+	DstIarServiceCode string `json:"IarServiceCode"` // コピー先のiarのサービスコード(iar########)
+	Image             string  // コピー ("Copy")
 }
 
 // URI /{{.GisServiceCode}}/storage-archive/{{.IarServiceCode}}/images/{{.ImageId}}/action.json
@@ -47,7 +47,7 @@ func init() {
 // StorageImageCopyResponse
 type StorageImageCopyResponse struct {
 	*CommonResponse
-	GisServiceCode string `json:",omitempty"`
-	IarServiceCode string `json:",omitempty"`
-	ImageId        string `json:",omitempty"`
+	GisServiceCode string `json:",omitempty"` // コピー先のgisのサービスコード
+	IarServiceCode string `json:",omitempty"` // コピー先のiarのサービスコード
+	ImageId        string `json:",omitempty"` // コピー先でのイメージのID
 }
