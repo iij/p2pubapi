@@ -168,7 +168,7 @@ func argumentAltKeyList(arg protocol.CommonArg) (toAltQuery, toAltJSON map[strin
 		tagstrJSON := fld.Tag.Get("json")
 		tagstrP2 := fld.Tag.Get("p2pub")
 		altKey := strings.Split(tagstrJSON, ",")[0]
-		if altKey == "" {
+		if altKey == "" || altKey == "-" {
 			continue
 		}
 		if strings.Contains(tagstrP2, "query") {
