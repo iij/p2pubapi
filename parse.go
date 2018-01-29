@@ -159,6 +159,27 @@ func ArgumentListType(arg protocol.CommonArg) (toURI, toQuery, toJSON []string) 
 	return
 }
 
+func argumentAltKeyList(arg protocol.CommonArg) (toAltQuery, toAltJSON map[string]string) {
+	toAltQuery = make(map[string]string)
+	toAltJSON =  make(map[string]string)
+	typs := reflect.TypeOf(arg)
+	for i := 0; i < typs.NumField(); i++ {
+		fld := typs.Field(i)
+		tagstrJSON := fld.Tag.Get("json")
+		tagstrP2 := fld.Tag.Get("p2pub")
+		altKey := strings.Split(tagstrJSON, ",")[0]
+		if altKey == "" || altKey == "-" {
+			continue
+		}
+		if strings.Contains(tagstrP2, "query") {
+			toAltQuery[fld.Name] = altKey
+		} else {
+			toAltJSON[fld.Name] = altKey
+		}
+	}
+	return
+}
+
 // ValidateMap APIの必須引数が入っているかどうかをチェック
 func ValidateMap(name string, data map[string]string) error {
 	var res []string
@@ -201,15 +222,25 @@ func CallWithMap(api API, name string, data map[string]string, resp map[string]i
 	q := param.Query()
 	_, toQuery, toJSON := ArgumentListType(arg)
 	log.Debug("query", toQuery, "json", toJSON, "path", param.Path)
+	toAltQuery, toAltJSON := argumentAltKeyList(arg)
+	log.Debug("query altkey - ", toAltQuery, " json altkey - ", toAltJSON)
 	var jsonmap = map[string]interface{}{}
 	for _, v := range toJSON {
 		if len(data[v]) != 0 {
-			jsonmap[v] = data[v]
+			if altkey, ok := toAltJSON[v]; ok {
+				jsonmap[altkey] = data[v]
+			} else {
+				jsonmap[v] = data[v]
+			}
 		}
 	}
 	for _, v := range toQuery {
 		if len(data[v]) != 0 {
-			q.Set(v, data[v])
+			if altkey, ok := toAltQuery[v]; ok {
+				q.Set(altkey, data[v])
+			} else {
+				q.Set(v, data[v])
+			}
 		}
 	}
 	param.RawQuery = q.Encode()
