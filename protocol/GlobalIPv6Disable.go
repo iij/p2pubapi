@@ -13,7 +13,7 @@ type GlobalIPv6Disable struct {
 
 // URI /{{.GisServiceCode}}/virtual-servers/{{.IvmServiceCode}}/global-ipaddresses/ipv6
 func (t GlobalIPv6Disable) URI() string {
-	return "/{{.GisServiceCode}}/virtual-servers/{{.IvmServiceCode}}/global-ipaddresses/ipv6"
+	return "/{{.GisServiceCode}}/virtual-servers/{{.IvmServiceCode}}/global-ipaddresses/ipv6.json"
 }
 
 // APIName GlobalIPv6Disable
