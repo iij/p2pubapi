@@ -7,10 +7,9 @@ import (
 // LBControlPanelACLSet LB管理画面アクセス制限設定 (同期)
 //  http://manual.iij.jp/p2/pubapi/59941002.html
 type LBControlPanelACLSet struct {
-	GisServiceCode                       string `json:"-"` // P2契約のサービスコード(gis########)
-	IflServiceCode                       string `json:"-"` // FW+LB 専有タイプのサービスコード(ifl########)
-	AdministrationServerAllowNetworkList []struct {
-	}
+	GisServiceCode                       string   `json:"-"` // P2契約のサービスコード(gis########)
+	IflServiceCode                       string   `json:"-"` // FW+LB 専有タイプのサービスコード(ifl########)
+	AdministrationServerAllowNetworkList []string `json:",omitempty"`
 }
 
 // URI /{{.GisServiceCode}}/fw-lbs/{{.IflServiceCode}}/lb/adminserver/allows.json
@@ -45,4 +44,10 @@ func init() {
 // LBControlPanelACLSetResponse LB管理画面アクセス制限設定のレスポンス
 type LBControlPanelACLSetResponse struct {
 	*CommonResponse
+	Current struct {
+		AdministrationServerAllowNetworkList []string `json:",omitempty"`
+	}
+	Previous struct {
+		AdministrationServerAllowNetworkList []string `json:",omitempty"`
+	}
 }
