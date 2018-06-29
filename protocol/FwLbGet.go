@@ -45,18 +45,21 @@ type FwLbGetResponse struct {
 	*CommonResponse
 	ResourceStatus string `json:",omitempty"` // FW+LB 専有タイプステータス
 	ServiceCode    string `json:",omitempty"` // FW+LB 専有タイプのサービスコード(ifl########)
-	TrafficIpList  []struct {
-		IPv4 struct {
-			TrafficIpName    string `json:",omitempty"` // トラフィックIP名(文字列)
-			TrafficIpAddress string `json:",omitempty"` // トラフィックIPv4アドレス(IPv4アドレス)
-			DomainName       string `json:",omitempty"` // 逆引きドメイン名。ネットワーク種別がGlobalに限る(文字列)
+	Lb             struct {
+		AdministrationServerAllowNetworkList []string `json:",omitempty"`
+		TrafficIpList                        []struct {
+			IPv4 struct {
+				TrafficIpName    string `json:",omitempty"` // トラフィックIP名(文字列)
+				TrafficIpAddress string `json:",omitempty"` // トラフィックIPv4アドレス(IPv4アドレス)
+				DomainName       string `json:",omitempty"` // 逆引きドメイン名。ネットワーク種別がGlobalに限る(文字列)
+			} `json:",omitempty"`
+			IPv6 struct {
+				TrafficIpName    string `json:",omitempty"` // トラフィックIP名(文字列)
+				TrafficIpAddress string `json:",omitempty"` // トラフィックIPv6アドレス(IPv6アドレス)
+				DomainName       string `json:",omitempty"` // 逆引きドメイン名。ネットワーク種別がGlobalに限る(文字列)
+			} `json:",omitempty"`
 		} `json:",omitempty"`
-		IPv6 struct {
-			TrafficIpName    string `json:",omitempty"` // トラフィックIP名(文字列)
-			TrafficIpAddress string `json:",omitempty"` // トラフィックIPv6アドレス(IPv6アドレス)
-			DomainName       string `json:",omitempty"` // 逆引きドメイン名。ネットワーク種別がGlobalに限る(文字列)
-		} `json:",omitempty"`
-	} `json:",omitempty"`
+	}
 	Internal struct {
 		NetworkType      string `json:",omitempty"` // ネットワーク種別
 		TrafficIpAddress string `json:",omitempty"` // トラフィックIPアドレス(IPアドレス)

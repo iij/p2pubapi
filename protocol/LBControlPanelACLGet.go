@@ -43,6 +43,5 @@ func init() {
 // LBControlPanelACLGetResponse LB管理画面アクセス制限情報取得のレスポンス
 type LBControlPanelACLGetResponse struct {
 	*CommonResponse
-	AdministrationServerAllowNetworkList []struct {
-	}
+	AdministrationServerAllowNetworkList []string `json:",omitempty"`
 }
