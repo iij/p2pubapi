@@ -9,9 +9,12 @@ import (
 type DataDeviceStorageConnect struct {
 	GisServiceCode string `json:"-"`          // P2契約のサービスコード(gis########)
 	IvmServiceCode string `json:"-"`          // 仮想サーバのサービスコード(ivm########, ivd########)
-	IbgServiceCode string `json:",omitempty"` // 追加ストレージ性能保証タイプのサービスコード(ibg########)
-	IbbServiceCode string `json:",omitempty"` // 追加ストレージベストエフォートタイプのサービスコード(ibb########)
-	IbaServiceCode string `json:",omitempty"` // システムストレージのサービスコード(iba########)
+	IbgServiceCode string `json:",omitempty"` // 追加ストレージ性能保証タイプ S のサービスコード(ibg########)
+	IbbServiceCode string `json:",omitempty"` // 追加ストレージベストエフォートタイプ S のサービスコード(ibb########)
+	IbaServiceCode string `json:",omitempty"` // システムストレージタイプ S のサービスコード(iba########)
+	IcgServiceCode string `json:",omitempty"` // 追加ストレージ性能保証タイプ X のサービスコード(icg########)
+	IcbServiceCode string `json:",omitempty"` // 追加ストレージベストエフォートタイプ X のサービスコード(icb########)
+	IcaServiceCode string `json:",omitempty"` // システムストレージタイプ X のサービスコード(ica########)
 }
 
 // URI /{{.GisServiceCode}}/virtual-servers/{{.IvmServiceCode}}/data-devices.json

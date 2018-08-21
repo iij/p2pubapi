@@ -43,6 +43,7 @@ func init() {
 // StorageGetResponse 追加ストレージ情報取得のレスポンス
 type StorageGetResponse struct {
 	*CommonResponse
+	ServiceCode    string `json:",omitempty"`
 	ResourceStatus        string `json:",omitempty"` // ストレージステータス
 	AttachedVirtualServer struct {
 		OSType      string `json:",omitempty"` // OS種別(Windows/Linux)
@@ -60,4 +61,6 @@ type StorageGetResponse struct {
 	ContractStatus string `json:",omitempty"` // 契約状態
 	StopDate       string `json:",omitempty"` // 解約予定日(YYYYMMDD。未設定の場合は空文字列)
 	Type           string `json:",omitempty"` // 追加ストレージ品目
+	Mode           string `json:",omitempty"` // ストレージのモード ("Basic", "Backup")
+	Encryption     string `json:",omitempty"` // 暗号化 ("Yes", "No")
 }

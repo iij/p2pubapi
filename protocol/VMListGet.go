@@ -64,6 +64,8 @@ type VMListGetResponse struct {
 			OSType      string `json:",omitempty"` // OS種別(None/Windows/Linux)
 			URI         string `json:",omitempty"` // ストレージの情報へアクセスするためのURI(URI)
 			Type        string `json:",omitempty"` // ストレージ品目
+			Mode        string `json:",omitempty"` // ストレージのモード ("Basic", "Backup")
+			Encryption  string `json:",omitempty"` // 暗号化 ("Yes", "No")
 		} `json:",omitempty"`
 		NetworkList []struct {
 			MacAddress    string `json:",omitempty"` // MACアドレス(例： 12-34-56-78-9a-bc)
