@@ -8,6 +8,7 @@ import (
 //  http://manual.iij.jp/p2/pubapi/59939812.html
 type SystemStorageAdd struct {
 	GisServiceCode string `json:"-"`          // P2契約のサービスコード(gis########)
+	Encryption     string `json:",omitempty"` // 暗号化 ("Yes", "No")
 	StorageGroup   string `json:",omitempty"` // ストレージグループ。省略時はどちらかのグループへ自動的に割り当てられます(Z/Y)
 	Type           string // ストレージ品目
 }
@@ -54,4 +55,6 @@ type SystemStorageAddResponse struct {
 	ContractStatus string `json:",omitempty"` // 契約状態
 	StopDate       string `json:",omitempty"` // 解約予定日(YYYYMMDD)
 	Type           string `json:",omitempty"` // システムストレージ品目
+	Mode           string `json:",omitempty"` // ストレージのモード ("Basic", "Backup")
+	Encryption     string `json:",omitempty"` // 暗号化 ("Yes", "No")
 }

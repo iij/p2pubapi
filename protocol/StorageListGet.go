@@ -63,5 +63,7 @@ type StorageListGetResponse struct {
 		} `json:",omitempty"`
 		Category       string `json:",omitempty"` // 追加ストレージ種別(BestEffort/Gurantee)
 		ContractStatus string `json:",omitempty"` // 契約状態
+		Mode           string `json:",omitempty"` // ストレージのモード ("Basic", "Backup")
+		Encryption     string `json:",omitempty"` // 暗号化 ("Yes", "No")
 	}
 }
