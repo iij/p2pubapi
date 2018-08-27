@@ -9,8 +9,8 @@ import (
 type BootDeviceStorageConnect struct {
 	GisServiceCode string `json:"-"` // P2契約のサービスコード(gis########)
 	IvmServiceCode string `json:"-"` // 仮想サーバのサービスコード(ivm########, ivd########)
-	IbaServiceCode string // システムストレージタイプ S のサービスコード(iba########)
-	IcaServiceCode string // システムストレージタイプ X のサービスコード(ica########)
+	IbaServiceCode string `json:",omitempty"` // システムストレージタイプ S のサービスコード(iba########)
+	IcaServiceCode string `json:",omitempty"` // システムストレージタイプ X のサービスコード(ica########)
 }
 
 // URI /{{.GisServiceCode}}/virtual-servers/{{.IvmServiceCode}}/boot-device.json
