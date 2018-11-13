@@ -43,5 +43,5 @@ func init() {
 // UserDataGetResponse
 type UserDataGetResponse struct {
 	*CommonResponse
-	UserData  string `json:",omitempty"` // base64エンコードされたユーザデータ
+	UserData string `json:",omitempty"` // base64エンコードされたユーザデータ
 }

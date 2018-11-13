@@ -7,8 +7,8 @@ import (
 // BootDeviceStorageConnect ブートデバイスストレージ接続 (同期)
 //  http://manual.iij.jp/p2/pubapi/59939555.html
 type BootDeviceStorageConnect struct {
-	GisServiceCode string `json:"-"` // P2契約のサービスコード(gis########)
-	IvmServiceCode string `json:"-"` // 仮想サーバのサービスコード(ivm########, ivd########)
+	GisServiceCode string `json:"-"`          // P2契約のサービスコード(gis########)
+	IvmServiceCode string `json:"-"`          // 仮想サーバのサービスコード(ivm########, ivd########)
 	IbaServiceCode string `json:",omitempty"` // システムストレージタイプ S のサービスコード(iba########)
 	IcaServiceCode string `json:",omitempty"` // システムストレージタイプ X のサービスコード(ica########)
 }
