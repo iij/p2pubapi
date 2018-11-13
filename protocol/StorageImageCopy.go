@@ -7,12 +7,12 @@ import (
 // StorageImageCopy ストレージイメージコピー
 //  http://manual.iij.jp/p2/pubapi/137048215.html
 type StorageImageCopy struct {
-	SrcGisServiceCode string `json:"-"` // 操作対象が所属するgisのサービスコード(gis########)
-	SrcIarServiceCode string `json:"-"` // 操作対象となるイメージが所属するストレージアーカイブのサービスコード(iar########)
-	SrcImageId        string `json:"-"` // 操作対象となるイメージのID
+	SrcGisServiceCode string `json:"-"`              // 操作対象が所属するgisのサービスコード(gis########)
+	SrcIarServiceCode string `json:"-"`              // 操作対象となるイメージが所属するストレージアーカイブのサービスコード(iar########)
+	SrcImageId        string `json:"-"`              // 操作対象となるイメージのID
 	DstGisServiceCode string `json:"GisServiceCode"` // コピー先のgisのサービスコード(gis########)
 	DstIarServiceCode string `json:"IarServiceCode"` // コピー先のiarのサービスコード(iar########)
-	Image             string  // コピー ("Copy")
+	Image             string // コピー ("Copy")
 }
 
 // URI /{{.GisServiceCode}}/storage-archive/{{.IarServiceCode}}/images/{{.ImageId}}/action.json

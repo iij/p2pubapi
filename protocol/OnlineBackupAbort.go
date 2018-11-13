@@ -7,8 +7,8 @@ import (
 // OnlineBackupAbort オンラインバックアップ中止 (非同期)
 //  http://manual.iij.jp/p2/pubapi/152684075.html
 type OnlineBackupAbort struct {
-	GisServiceCode     string `json:"-"`          // P2契約のサービスコード(gis########)
-	StorageServiceCode string `json:"-"`          // ストレージのサービスコード(ica########)
+	GisServiceCode     string `json:"-"` // P2契約のサービスコード(gis########)
+	StorageServiceCode string `json:"-"` // ストレージのサービスコード(ica########)
 }
 
 // URI /{{.GisServiceCode}}/system-storages/{{.StorageServiceCode}}/backup.json

@@ -11,7 +11,7 @@ import (
 	"time"
 	"unicode"
 
-	"gopkg.in/yaml.v1"
+	yaml "gopkg.in/yaml.v2"
 
 	log "github.com/Sirupsen/logrus"
 	"github.com/mattn/go-shellwords"

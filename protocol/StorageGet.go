@@ -43,7 +43,7 @@ func init() {
 // StorageGetResponse 追加ストレージ情報取得のレスポンス
 type StorageGetResponse struct {
 	*CommonResponse
-	ServiceCode    string `json:",omitempty"`
+	ServiceCode           string `json:",omitempty"`
 	ResourceStatus        string `json:",omitempty"` // ストレージステータス
 	AttachedVirtualServer struct {
 		OSType      string `json:",omitempty"` // OS種別(Windows/Linux)

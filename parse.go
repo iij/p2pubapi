@@ -161,7 +161,7 @@ func ArgumentListType(arg protocol.CommonArg) (toURI, toQuery, toJSON []string) 
 
 func argumentAltKeyList(arg protocol.CommonArg) (toAltQuery, toAltJSON map[string]string) {
 	toAltQuery = make(map[string]string)
-	toAltJSON =  make(map[string]string)
+	toAltJSON = make(map[string]string)
 	typs := reflect.TypeOf(arg)
 	for i := 0; i < typs.NumField(); i++ {
 		fld := typs.Field(i)
