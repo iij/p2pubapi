@@ -99,6 +99,8 @@ def apiname2(d):
     "作成": "Create",
     "名": "Name",
     "サイズ": "Size",
+    "バックアップ": "Backup",
+    "（契約）": "ForCustomer",
   }
   for k in sorted(namemap, key=lambda k: len(k), reverse=True):
     d=d.replace(k,namemap[k])
