@@ -99,6 +99,8 @@ def apiname2(d):
     "作成": "Create",
     "名": "Name",
     "サイズ": "Size",
+    "バックアップ": "Backup",
+    "（契約）": "ForCustomer",
   }
   for k in sorted(namemap, key=lambda k: len(k), reverse=True):
     d=d.replace(k,namemap[k])
@@ -113,7 +115,7 @@ def apiname(d):
     name+=snake2camel(os.path.splitext(m)[0])
   return name+mtd.capitalize()
 
-def async(d):
+def async_api(d):
   return d["実行"]
 
 def template(d):
@@ -151,7 +153,7 @@ def do1(fname, baseurl):
   assert(re.match("^[a-zA-Z0-9]*$", res["name"]))
   res["template"], tmpl_args=template(key)
   res["method"]=method(key)
-  res["async"]=async(key)
+  res["async"]=async_api(key)
   # print("api-info", res)
 
   res["template_arg"]=[]
