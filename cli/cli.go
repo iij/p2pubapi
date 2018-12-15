@@ -364,6 +364,8 @@ func main() {
 	if len(os.Args) == 1 {
 		cmdrepl.CmdRepl("[P2PUB]# ", app)
 	} else {
-		app.Run(os.Args)
+		if err := app.Run(os.Args); err != nil {
+			os.Exit(-1)
+		}
 	}
 }
