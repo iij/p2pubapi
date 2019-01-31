@@ -10,7 +10,7 @@ type LBControlPanelAccountPasswordSet struct {
 	GisServiceCode string `json:"-"` // P2契約のサービスコード(gis########)
 	IflServiceCode string `json:"-"` // FW+LB 専有タイプのサービスコード(ifl########)
 	AccountName    string `json:"-"` // パスワードを設定するアカウント("customer" "monitoring")
-	Password       string `json:"-"` // パスワード(8文字以上、32文字以下  半角英字・半角数字・半角記号をそれぞれ１文字以上含む  半角記号は「"#$%&'*+,.-/:;=<>()[]{}?@\^_`|~!」を利用可能)
+	Password       string // パスワード(8文字以上、32文字以下  半角英字・半角数字・半角記号をそれぞれ１文字以上含む  半角記号は「"#$%&'*+,.-/:;=<>()[]{}?@\^_`|~!」を利用可能)
 }
 
 // URI /{{.GisServiceCode}}/fw-lbs/{{.IflServiceCode}}/lb/accounts/{{.AccountName}}.json
