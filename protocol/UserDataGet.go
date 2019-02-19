@@ -7,13 +7,13 @@ import (
 // UserDataGet システムストレージ ユーザーデータ設定
 // http://manual.iij.jp/p2/pubapi/137048177.html
 type UserDataGet struct {
-	GisServiceCode string `json:"-"` // ユーザデータを設定されているシステムストレージが所属するgisのサービスコード(gis########)
-	IbaServiceCode string `json:"-"` // 起動するシステムストレージのサービスコード(iar########)
+	GisServiceCode     string `json:"-"` // ユーザデータを設定されているシステムストレージが所属するgisのサービスコード(gis########)
+	StorageServiceCode string `json:"-"` // 起動するシステムストレージのサービスコード(iba########/ica########)
 }
 
-// URI /{{.GisServiceCode}}/system-storages/{{.IbaServiceCode}}/user-data.json
+// URI /{{.GisServiceCode}}/system-storages/{{.StorageServiceCode}}/user-data.json
 func (t UserDataGet) URI() string {
-	return "/{{.GisServiceCode}}/system-storages/{{.IbaServiceCode}}/user-data.json"
+	return "/{{.GisServiceCode}}/system-storages/{{.StorageServiceCode}}/user-data.json"
 }
 
 // APIName UserDataGet

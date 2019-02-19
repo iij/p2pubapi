@@ -37,15 +37,15 @@ func WaitVM(api *API, gis, ivm string, cstatus, rstatus Status, maxwait time.Dur
 	return nil
 }
 
-// WaitSystemStorage wait iba status (contract status, resource status)
+// WaitSystemStorage wait system storage status (contract status, resource status)
 // Contract Status(cstatus): InPreparation/InService
 // Resource Status(rstatus): Attached/NotAttached/Initializing/Configuring/Archiving
-func WaitSystemStorage(api *API, gis, iba string, cstatus, rstatus Status, maxwait time.Duration) error {
+func WaitSystemStorage(api *API, gis, storage string, cstatus, rstatus Status, maxwait time.Duration) error {
 	start := time.Now()
 	for {
 		arg := protocol.SystemStorageGet{
 			GisServiceCode: gis,
-			IbaServiceCode: iba,
+			StorageServiceCode: storage,
 		}
 		var res = protocol.SystemStorageGetResponse{}
 		if err := Call(*api, arg, &res); err != nil {
@@ -63,15 +63,15 @@ func WaitSystemStorage(api *API, gis, iba string, cstatus, rstatus Status, maxwa
 	return nil
 }
 
-// WaitDataStorage wait ibg status (contract status, resource status)
+// WaitDataStorage wait storage status (contract status, resource status)
 // Contract Status(cstatus): InPreparation/InService
 // Resource Status(rstatus): Attached/NotAttached/Initializing/Configuring/Archiving
-func WaitDataStorage(api *API, gis, ibg string, cstatus, rstatus Status, maxwait time.Duration) error {
+func WaitDataStorage(api *API, gis, storage string, cstatus, rstatus Status, maxwait time.Duration) error {
 	start := time.Now()
 	for {
 		arg := protocol.StorageGet{
 			GisServiceCode: gis,
-			IbgServiceCode: ibg,
+			StorageServiceCode: storage,
 		}
 		var res = protocol.StorageGetResponse{}
 		if err := Call(*api, arg, &res); err != nil {

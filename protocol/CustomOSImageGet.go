@@ -48,7 +48,7 @@ type CustomOSImageGetResponse struct {
 	OSType           string `json:",omitempty"` // OS種別(Windows/Linux)
 	ArchivedDateTime string `json:",omitempty"` // カスタムOSイメージの作成日時(YYYY-MM-DDThh:mm:ssZ)
 	Label            string `json:",omitempty"` // ラベル(文字列)
-	SrcServiceCode   string `json:",omitempty"` // システムストレージのサービスコード(iba########)
+	SrcServiceCode   string `json:",omitempty"` // システムストレージのサービスコード(iba########/ica########)
 	ImageId          string `json:",omitempty"` // カスタムOSイメージのId(数値)
 	ImageSize        string `json:",omitempty"` // カスタムOSイメージのサイズ（MB）(文字列)
 	Type             string `json:",omitempty"` // システムストレージ品目

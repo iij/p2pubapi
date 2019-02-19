@@ -48,7 +48,7 @@ type SystemStorageContractListGetResponse struct {
 	SystemStorageList []struct {
 		SystemStorageList []struct {
 			ContractStatus string `json:",omitempty"` // 契約状態
-			ServiceCode    string `json:",omitempty"` // システムストレージのサービスコード(iba########)
+			ServiceCode    string `json:",omitempty"` // システムストレージのサービスコード(iba########/ica########)
 		} `json:",omitempty"`
 	}
 }

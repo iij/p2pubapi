@@ -49,7 +49,7 @@ type BootDeviceStorageDisconnectResponse struct {
 	} `json:",omitempty"`
 	Previous struct {
 		URI         string `json:",omitempty"` // 切り離し前のシステムストレージの情報へアクセスするURI(URI)
-		ServiceCode string `json:",omitempty"` // 切り離し前のシステムストレージのサービスコード(iba########)
+		ServiceCode string `json:",omitempty"` // 切り離し前のシステムストレージのサービスコード(iba########/ica########)
 	} `json:",omitempty"`
 	PciSlot string `json:",omitempty"` // PCIスロット(16進数)
 }

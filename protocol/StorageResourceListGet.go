@@ -48,7 +48,7 @@ type StorageResourceListGetResponse struct {
 	AdditionalStorageList []struct {
 		AdditionalStorageList []struct {
 			ResourceStatus string `json:",omitempty"` // ストレージステータス
-			ServiceCode    string `json:",omitempty"` // 追加ストレージのサービスコード(ibg########/ibb########)
+			ServiceCode    string `json:",omitempty"` // 追加ストレージのサービスコード(ibg########/ibb########/icg########/icb########)
 		} `json:",omitempty"`
 	}
 }

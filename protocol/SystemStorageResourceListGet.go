@@ -48,7 +48,7 @@ type SystemStorageResourceListGetResponse struct {
 	SystemStorageList []struct {
 		SystemStorageList []struct {
 			ResourceStatus string `json:",omitempty"` // ストレージステータス
-			ServiceCode    string `json:",omitempty"` // システムストレージのサービスコード(iba########)
+			ServiceCode    string `json:",omitempty"` // システムストレージのサービスコード(iba########/ica########)
 		} `json:",omitempty"`
 	}
 }

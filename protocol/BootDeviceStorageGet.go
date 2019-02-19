@@ -46,6 +46,6 @@ type BootDeviceStorageGetResponse struct {
 	OSType      string `json:",omitempty"` // OS種別(Windows/Linux)
 	URI         string `json:",omitempty"` // ストレージの情報へアクセスするためのURI(URI)
 	PciSlot     string `json:",omitempty"` // PCIスロット(16進数)
-	ServiceCode string `json:",omitempty"` // ストレージのサービスコード(iba########)
+	ServiceCode string `json:",omitempty"` // ストレージのサービスコード(iba########/ica########)
 	Type        string `json:",omitempty"` // ストレージ 品目
 }

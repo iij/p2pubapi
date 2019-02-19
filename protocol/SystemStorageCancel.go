@@ -7,14 +7,14 @@ import (
 // SystemStorageCancel システムストレージ解約申込 (同期)
 //  http://manual.iij.jp/p2/pubapi/59939969.html
 type SystemStorageCancel struct {
-	GisServiceCode string `json:"-"`                // P2契約のサービスコード(gis########)
-	IbaServiceCode string `json:"-"`                // システムストレージのサービスコード(iba########)
-	StopDate       string `json:"-" p2pub:",query"` // 解約予定日(YYYYMMDD)
+	GisServiceCode     string `json:"-"`                // P2契約のサービスコード(gis########)
+	StorageServiceCode string `json:"-"`                // システムストレージのサービスコード(iba########/ica########)
+	StopDate           string `json:"-" p2pub:",query"` // 解約予定日(YYYYMMDD)
 }
 
-// URI /{{.GisServiceCode}}/system-storages/{{.IbaServiceCode}}.json
+// URI /{{.GisServiceCode}}/system-storages/{{.StorageServiceCode}}.json
 func (t SystemStorageCancel) URI() string {
-	return "/{{.GisServiceCode}}/system-storages/{{.IbaServiceCode}}.json"
+	return "/{{.GisServiceCode}}/system-storages/{{.StorageServiceCode}}.json"
 }
 
 // APIName SystemStorageCancel

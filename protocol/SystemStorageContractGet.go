@@ -7,14 +7,14 @@ import (
 // SystemStorageContractGet システムストレージ契約状態取得 (同期)
 //  http://manual.iij.jp/p2/pubapi/59939962.html
 type SystemStorageContractGet struct {
-	GisServiceCode string `json:"-"`                // P2契約のサービスコード(gis########)
-	IbaServiceCode string `json:"-"`                // システムストレージのサービスコード(iba########)
-	Item           string `json:"-" p2pub:",query"` // 取得するフィールド("ContractStatus")
+	GisServiceCode     string `json:"-"`                // P2契約のサービスコード(gis########)
+	StorageServiceCode string `json:"-"`                // システムストレージのサービスコード(iba########/ica########)
+	Item               string `json:"-" p2pub:",query"` // 取得するフィールド("ContractStatus")
 }
 
-// URI /{{.GisServiceCode}}/system-storages/{{.IbaServiceCode}}.json
+// URI /{{.GisServiceCode}}/system-storages/{{.StorageServiceCode}}.json
 func (t SystemStorageContractGet) URI() string {
-	return "/{{.GisServiceCode}}/system-storages/{{.IbaServiceCode}}.json"
+	return "/{{.GisServiceCode}}/system-storages/{{.StorageServiceCode}}.json"
 }
 
 // APIName SystemStorageContractGet

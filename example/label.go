@@ -50,24 +50,24 @@ func setIvm(ivm, newlabel string) error {
 	return nil
 }
 
-func showIba(iba string) error {
+func showSystemStorage(storage string) error {
 	arg := protocol.SystemStorageGet{
 		GisServiceCode: gis,
-		IbaServiceCode: iba,
+		StorageServiceCode: storage,
 	}
 	var res = protocol.SystemStorageGetResponse{}
 	api := newapi()
 	if err := p2pubapi.Call(*api, arg, &res); err != nil {
 		return err
 	}
-	log.Println(iba, res.Label)
+	log.Println(storage, res.Label)
 	return nil
 }
 
-func setIba(iba, newlabel string) error {
+func setSystemStorage(storage, newlabel string) error {
 	arg := protocol.SystemStorageLabelSet{
 		GisServiceCode: gis,
-		IbaServiceCode: iba,
+		StorageServiceCode: storage,
 		Name:           newlabel,
 	}
 	var res = protocol.SystemStorageLabelSetResponse{}
@@ -75,7 +75,7 @@ func setIba(iba, newlabel string) error {
 	if err := p2pubapi.Call(*api, arg, &res); err != nil {
 		return err
 	}
-	log.Println(iba, res)
+	log.Println(storage, res)
 	return nil
 }
 
@@ -115,8 +115,8 @@ func show(sc string) {
 	switch sc[0:3] {
 	case "ivm":
 		showIvm(sc)
-	case "iba":
-		showIba(sc)
+	case "iba", "ica":
+		showSystemStorage(sc)
 	case "iar":
 		showIar(sc)
 	default:
@@ -128,8 +128,8 @@ func set(sc, val1, val2 string) {
 	switch sc[0:3] {
 	case "ivm":
 		setIvm(sc, val1)
-	case "iba":
-		setIba(sc, val1)
+	case "iba", "ica":
+		setSystemStorage(sc, val1)
 	case "iar":
 		setIar(sc, val1, val2)
 	default:

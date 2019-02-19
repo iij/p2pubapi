@@ -7,14 +7,14 @@ import (
 // PasswordSet パスワード設定 (非同期)
 //  http://manual.iij.jp/p2/pubapi/59940023.html
 type PasswordSet struct {
-	GisServiceCode string `json:"-"` // P2契約のサービスコード(gis########)
-	IbaServiceCode string `json:"-"` // システムストレージのサービスコード(iba########)
-	Password       string // パスワード(8～32文字)
+	GisServiceCode     string `json:"-"` // P2契約のサービスコード(gis########)
+	StorageServiceCode string `json:"-"` // システムストレージのサービスコード(iba########/ica########)
+	Password           string // パスワード(8～32文字)
 }
 
-// URI /{{.GisServiceCode}}/system-storages/{{.IbaServiceCode}}/password.json
+// URI /{{.GisServiceCode}}/system-storages/{{.StorageServiceCode}}/password.json
 func (t PasswordSet) URI() string {
-	return "/{{.GisServiceCode}}/system-storages/{{.IbaServiceCode}}/password.json"
+	return "/{{.GisServiceCode}}/system-storages/{{.StorageServiceCode}}/password.json"
 }
 
 // APIName PasswordSet

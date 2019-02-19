@@ -7,13 +7,13 @@ import (
 // StorageGet 追加ストレージ情報取得 (同期)
 //  http://manual.iij.jp/p2/pubapi/59940143.html
 type StorageGet struct {
-	GisServiceCode string `json:"-"` // P2契約のサービスコード(gis########)
-	IbgServiceCode string `json:"-"` // 追加ストレージのサービスコード(ibb########, ibg########)
+	GisServiceCode     string `json:"-"` // P2契約のサービスコード(gis########)
+	StorageServiceCode string `json:"-"` // 追加ストレージのサービスコード(ibb########, ibg########, icb########, icg########)
 }
 
-// URI /{{.GisServiceCode}}/additional-storages/{{.IbgServiceCode}}.json
+// URI /{{.GisServiceCode}}/additional-storages/{{.StorageServiceCode}}.json
 func (t StorageGet) URI() string {
-	return "/{{.GisServiceCode}}/additional-storages/{{.IbgServiceCode}}.json"
+	return "/{{.GisServiceCode}}/additional-storages/{{.StorageServiceCode}}.json"
 }
 
 // APIName StorageGet
