@@ -30,7 +30,7 @@ func cancelVM(api *p2pubapi.API, gis, sc string) error {
 func cancelSystemStorage(api *p2pubapi.API, gis, sc string) error {
 	arg := protocol.SystemStorageCancel{
 		GisServiceCode: gis,
-		IbaServiceCode: sc,
+		StorageServiceCode: sc,
 	}
 	var res = protocol.SystemStorageCancelResponse{}
 	if err := p2pubapi.Call(*api, arg, &res); err != nil {
@@ -42,7 +42,7 @@ func cancelSystemStorage(api *p2pubapi.API, gis, sc string) error {
 func cancelDataStorage(api *p2pubapi.API, gis, sc string) error {
 	arg := protocol.StorageCancel{
 		GisServiceCode: gis,
-		IbgServiceCode: sc,
+		StorageServiceCode: sc,
 	}
 	var res = protocol.StorageCancelResponse{}
 	if err := p2pubapi.Call(*api, arg, &res); err != nil {
@@ -110,9 +110,9 @@ func main() {
 			err = fmt.Errorf("unknown service code prefix: %s (%s)", v[0:3], v)
 		case "ivm", "ivd":
 			err = cancelVM(api, gis, v)
-		case "iba":
+		case "iba", "ica":
 			err = cancelSystemStorage(api, gis, v)
-		case "ibg", "ibb":
+		case "ibg", "ibb", "icg", "icb":
 			err = cancelDataStorage(api, gis, v)
 		case "iar":
 			err = cancelArchiveStorage(api, gis, v)

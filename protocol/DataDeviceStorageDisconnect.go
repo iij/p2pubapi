@@ -47,6 +47,6 @@ type DataDeviceStorageDisconnectResponse struct {
 	OSType      string `json:",omitempty"` // OS種別(Windows/Linux)
 	URI         string `json:",omitempty"` // ストレージの情報へアクセスするためのURI(URI)
 	Category    string `json:",omitempty"` // ストレージ種別(BestEffort/Gurantee)
-	ServiceCode string `json:",omitempty"` // ストレージのサービスコード(iba########)
+	ServiceCode string `json:",omitempty"` // ストレージのサービスコード(iba/ibb/ibg/ica/icb/icg########)
 	Type        string `json:",omitempty"` // ストレージ品目
 }

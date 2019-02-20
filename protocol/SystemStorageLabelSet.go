@@ -7,14 +7,14 @@ import (
 // SystemStorageLabelSet システムストレージラベル設定 (同期)
 //  http://manual.iij.jp/p2/pubapi/59939994.html
 type SystemStorageLabelSet struct {
-	GisServiceCode string `json:"-"` // P2契約のサービスコード(gis########)
-	IbaServiceCode string `json:"-"` // システムストレージのサービスコード(iba########)
-	Name           string // ラベル(文字列)
+	GisServiceCode     string `json:"-"` // P2契約のサービスコード(gis########)
+	StorageServiceCode string `json:"-"` // システムストレージのサービスコード(iba########, ica########)
+	Name               string // ラベル(文字列)
 }
 
-// URI /{{.GisServiceCode}}/system-storages/{{.IbaServiceCode}}/label.json
+// URI /{{.GisServiceCode}}/system-storages/{{.StorageServiceCode}}/label.json
 func (t SystemStorageLabelSet) URI() string {
-	return "/{{.GisServiceCode}}/system-storages/{{.IbaServiceCode}}/label.json"
+	return "/{{.GisServiceCode}}/system-storages/{{.StorageServiceCode}}/label.json"
 }
 
 // APIName SystemStorageLabelSet

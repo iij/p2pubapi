@@ -7,13 +7,13 @@ import (
 // SystemStorageGet システムストレージ情報取得 (同期)
 //  http://manual.iij.jp/p2/pubapi/59939955.html
 type SystemStorageGet struct {
-	GisServiceCode string `json:"-"` // P2契約のサービスコード(gis########)
-	IbaServiceCode string `json:"-"` // システムストレージのサービスコード(iba########)
+	GisServiceCode     string `json:"-"` // P2契約のサービスコード(gis########)
+	StorageServiceCode string `json:"-"` // システムストレージのサービスコード(iba########/ica########)
 }
 
-// URI /{{.GisServiceCode}}/system-storages/{{.IbaServiceCode}}.json
+// URI /{{.GisServiceCode}}/system-storages/{{.StorageServiceCode}}.json
 func (t SystemStorageGet) URI() string {
-	return "/{{.GisServiceCode}}/system-storages/{{.IbaServiceCode}}.json"
+	return "/{{.GisServiceCode}}/system-storages/{{.StorageServiceCode}}.json"
 }
 
 // APIName SystemStorageGet
@@ -52,7 +52,6 @@ type SystemStorageGetResponse struct {
 		Type        string `json:",omitempty"` // 仮想サーバ品目
 	} `json:",omitempty"`
 	Label          string `json:",omitempty"` // ラベル(文字列)
-	ServiceCode    string `json:",omitempty"` // システムストレージのサービスコード(iba########)
 	OSType         string `json:",omitempty"` // OS種別(Linux/Windows)
 	StorageGroup   string `json:",omitempty"` // ストレージグループ(Z/Y)
 	StartDate      string `json:",omitempty"` // 利用開始日(YYYYMMDD)

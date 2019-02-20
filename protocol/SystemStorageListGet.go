@@ -54,7 +54,7 @@ type SystemStorageListGetResponse struct {
 			Type        string `json:",omitempty"` // 仮想サーバ品目
 		} `json:",omitempty"`
 		Label          string `json:",omitempty"` // ラベル(文字列)
-		ServiceCode    string `json:",omitempty"` // システムストレージのサービスコード(iba########)
+		ServiceCode    string `json:",omitempty"` // システムストレージのサービスコード(iba########/ica########)
 		OSType         string `json:",omitempty"` // OS種別(Linux/Windows)
 		StorageGroup   string `json:",omitempty"` // ストレージグループ(Z/Y)
 		StartDate      string `json:",omitempty"` // 利用開始日(YYYYMMDD)

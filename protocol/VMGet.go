@@ -58,7 +58,7 @@ type VMGetResponse struct {
 	StorageList []struct {
 		Boot        string `json:",omitempty"` // ブート可否(No/Yes)
 		PciSlot     string `json:",omitempty"` // PCIスロット(16進数。例： 0x10)
-		ServiceCode string `json:",omitempty"` // ストレージのサービスコード(Iba########/ibg########/ibb########)
+		ServiceCode string `json:",omitempty"` // ストレージのサービスコード(iba/ibb/ibg/ica/icb/icg########)
 		OSType      string `json:",omitempty"` // OS種別(None/Windows/Linux)
 		URI         string `json:",omitempty"` // ストレージの情報へアクセスするためのURI(URI)
 		Type        string `json:",omitempty"` // ストレージ品目

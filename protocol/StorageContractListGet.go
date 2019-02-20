@@ -48,7 +48,7 @@ type StorageContractListGetResponse struct {
 	AdditionalStorageList []struct {
 		AdditionalStorageList []struct {
 			ContractStatus string `json:",omitempty"` // 契約状態
-			ServiceCode    string `json:",omitempty"` // 追加ストレージのサービスコード(ibg########/ibb########)
+			ServiceCode    string `json:",omitempty"` // 追加ストレージのサービスコード(ibg########/ibb########/icg########/icb########)
 		} `json:",omitempty"`
 	}
 }

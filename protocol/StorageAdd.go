@@ -47,7 +47,7 @@ type StorageAddResponse struct {
 	*CommonResponse
 	ResourceStatus string `json:",omitempty"` // ストレージステータス
 	Label          string `json:",omitempty"` // ラベル(文字列)
-	ServiceCode    string `json:",omitempty"` // 追加ストレージのサービスコード(ibg########/ibb########)
+	ServiceCode    string `json:",omitempty"` // 追加ストレージのサービスコード(ibg########/ibb########/icg########/icb########)
 	OSType         string `json:",omitempty"` // OS種別(None)
 	StorageGroup   string `json:",omitempty"` // ストレージグループ(Z/Y)
 	StartDate      string `json:",omitempty"` // 利用開始日(YYYYMMDD)

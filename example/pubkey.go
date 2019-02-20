@@ -57,7 +57,7 @@ func doMain(c *cli.Context) (err error) {
 		log.Info("pubkey", k.ID, k.Key)
 		arg := protocol.PublicKeyAdd{}
 		arg.GisServiceCode = c.String("GisServiceCode")
-		arg.IbaServiceCode = c.String("IbaServiceCode")
+		arg.StorageServiceCode = c.String("StorageServiceCode")
 		arg.PublicKey = k.Key
 		res := protocol.PublicKeyAddResponse{}
 		if err = p2pubapi.Validate(arg); err != nil {
@@ -96,9 +96,9 @@ func main() {
 			EnvVar: "GISSERVICECODE",
 		},
 		cli.StringFlag{
-			Name:   "IbaServiceCode, i",
-			Usage:  "ibaXXXXXXXX",
-			EnvVar: "IBASERVICECODE",
+			Name:   "StorageServiceCode, i",
+			Usage:  "ibaXXXXXXXX/icaXXXXXXXX",
+			EnvVar: "STORAGESERVICECODE",
 		},
 		cli.StringFlag{
 			Name:   "Account, User, u",

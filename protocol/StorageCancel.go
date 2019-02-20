@@ -7,14 +7,14 @@ import (
 // StorageCancel 追加ストレージ解約申込 (同期)
 //  http://manual.iij.jp/p2/pubapi/59940162.html
 type StorageCancel struct {
-	GisServiceCode string `json:"-"`                // P2契約のサービスコード(gis########)
-	IbgServiceCode string `json:"-"`                // 追加ストレージのサービスコード(ibb########, ibg########)
-	StopDate       string `json:"-" p2pub:",query"` // 解約予定日。省略した場合は即時(YYYYMMDD)
+	GisServiceCode     string `json:"-"`                // P2契約のサービスコード(gis########)
+	StorageServiceCode string `json:"-"`                // 追加ストレージのサービスコード(ibb########, ibg########, icb########, icg########)
+	StopDate           string `json:"-" p2pub:",query"` // 解約予定日。省略した場合は即時(YYYYMMDD)
 }
 
-// URI /{{.GisServiceCode}}/additional-storages/{{.IbgServiceCode}}.json
+// URI /{{.GisServiceCode}}/additional-storages/{{.StorageServiceCode}}.json
 func (t StorageCancel) URI() string {
-	return "/{{.GisServiceCode}}/additional-storages/{{.IbgServiceCode}}.json"
+	return "/{{.GisServiceCode}}/additional-storages/{{.StorageServiceCode}}.json"
 }
 
 // APIName StorageCancel

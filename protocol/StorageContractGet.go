@@ -7,14 +7,14 @@ import (
 // StorageContractGet 追加ストレージ契約状態取得 (同期)
 //  http://manual.iij.jp/p2/pubapi/59940154.html
 type StorageContractGet struct {
-	GisServiceCode string `json:"-"`                // P2契約のサービスコード(gis########)
-	IbgServiceCode string `json:"-"`                // 追加ストレージのサービスコード(ibb########, ibg########)
-	Item           string `json:"-" p2pub:",query"` // 取得するフィールド("ContractStatus")
+	GisServiceCode     string `json:"-"`                // P2契約のサービスコード(gis########)
+	StorageServiceCode string `json:"-"`                // 追加ストレージのサービスコード(ibb########, ibg########, icb########, icg########)
+	Item               string `json:"-" p2pub:",query"` // 取得するフィールド("ContractStatus")
 }
 
-// URI /{{.GisServiceCode}}/additional-storages/{{.IbgServiceCode}}.json
+// URI /{{.GisServiceCode}}/additional-storages/{{.StorageServiceCode}}.json
 func (t StorageContractGet) URI() string {
-	return "/{{.GisServiceCode}}/additional-storages/{{.IbgServiceCode}}.json"
+	return "/{{.GisServiceCode}}/additional-storages/{{.StorageServiceCode}}.json"
 }
 
 // APIName StorageContractGet

@@ -47,7 +47,7 @@ type StorageListGetResponse struct {
 	AdditionalStorageList []struct {
 		ResourceStatus        string `json:",omitempty"` // ストレージステータス
 		StorageGroup          string `json:",omitempty"` // ストレージグループ(Z/Y)
-		ServiceCode           string `json:",omitempty"` // 追加ストレージのサービスコード(ibg########/ibb########)
+		ServiceCode           string `json:",omitempty"` // 追加ストレージのサービスコード(ibg########/ibb########/icg########/icb########)
 		StorageSize           string `json:",omitempty"` // ストレージ容量(数値)
 		StopDate              string `json:",omitempty"` // 解約予定日(YYYYMMDD。未設定ならば空文字列)
 		Type                  string `json:",omitempty"` // 追加ストレージ品目

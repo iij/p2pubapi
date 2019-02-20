@@ -7,14 +7,14 @@ import (
 // StorageLabelSet 追加ストレージラベル設定 (同期)
 //  http://manual.iij.jp/p2/pubapi/59940185.html
 type StorageLabelSet struct {
-	GisServiceCode string `json:"-"` // P2契約のサービスコード(gis########)
-	IbgServiceCode string `json:"-"` // 追加ストレージのサービスコード(ibb########, ibg########)
+	GisServiceCode     string `json:"-"` // P2契約のサービスコード(gis########)
+	StorageServiceCode string `json:"-"` // 追加ストレージのサービスコード(ibb########, ibg########, icb########, icg########)
 	Name           string // ラベル(文字列)
 }
 
-// URI /{{.GisServiceCode}}/additional-storages/{{.IbgServiceCode}}/label.json
+// URI /{{.GisServiceCode}}/additional-storages/{{.StorageServiceCode}}/label.json
 func (t StorageLabelSet) URI() string {
-	return "/{{.GisServiceCode}}/additional-storages/{{.IbgServiceCode}}/label.json"
+	return "/{{.GisServiceCode}}/additional-storages/{{.StorageServiceCode}}/label.json"
 }
 
 // APIName StorageLabelSet

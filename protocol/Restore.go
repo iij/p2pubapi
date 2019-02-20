@@ -7,16 +7,16 @@ import (
 // Restore リストア (非同期)
 //  http://manual.iij.jp/p2/pubapi/59940054.html
 type Restore struct {
-	GisServiceCode string `json:"-"` // P2契約のサービスコード(gis########)
-	IbaServiceCode string `json:"-"` // システムストレージのサービスコード(iba########)
-	ImageId        string // カスタムOSイメージID(数値)
-	IarServiceCode string // ストレージアーカイブのサービスコード(iar########)
-	Image          string // 操作内容(Archive)
+	GisServiceCode     string `json:"-"` // P2契約のサービスコード(gis########)
+	StorageServiceCode string `json:"-"` // システムストレージのサービスコード(iba########/ica########)
+	ImageId            string // カスタムOSイメージID(数値)
+	IarServiceCode     string // ストレージアーカイブのサービスコード(iar########)
+	Image              string // 操作内容(Archive)
 }
 
-// URI /{{.GisServiceCode}}/system-storages/{{.IbaServiceCode}}/action.json
+// URI /{{.GisServiceCode}}/system-storages/{{.StorageServiceCode}}/action.json
 func (t Restore) URI() string {
-	return "/{{.GisServiceCode}}/system-storages/{{.IbaServiceCode}}/action.json"
+	return "/{{.GisServiceCode}}/system-storages/{{.StorageServiceCode}}/action.json"
 }
 
 // APIName Restore

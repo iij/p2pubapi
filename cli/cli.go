@@ -330,13 +330,13 @@ func main() {
 			Action: func(c *cli.Context) error {
 				arg := c.Args()
 				if len(arg) == 0 {
-					log.Error("Usage: waitSystemStorage ibaXXXXXXXX [contractStatus] [ibaStatus]")
-					return fmt.Errorf("Usage: waitSystemStorage ibaXXXXXXXX [contractStatus] [ibaStatus]")
+					log.Error("Usage: waitSystemStorage iba/icaXXXXXXXX [contractStatus] [ibaStatus]")
+					return fmt.Errorf("Usage: waitSystemStorage iba/icaXXXXXXXX [contractStatus] [ibaStatus]")
 				}
-				iba, cst, sst := getwaitinfo(arg)
+				storage, cst, sst := getwaitinfo(arg)
 				api := getAPI(c)
 				gis := c.String("GisServiceCode")
-				res := p2pubapi.WaitSystemStorage(api, gis, iba, cst, sst, c.Duration("duration"))
+				res := p2pubapi.WaitSystemStorage(api, gis, storage, cst, sst, c.Duration("duration"))
 				return res
 			},
 		}, {
@@ -349,10 +349,10 @@ func main() {
 					log.Error("Usage: waitDataStorage i??XXXXXXXX [contractStatus] [ibaStatus]")
 					return fmt.Errorf("Usage: waitSystemStorage i??XXXXXXXX [contractStatus] [ibaStatus]")
 				}
-				iba, cst, sst := getwaitinfo(arg)
+				storage, cst, sst := getwaitinfo(arg)
 				api := getAPI(c)
 				gis := c.String("GisServiceCode")
-				res := p2pubapi.WaitDataStorage(api, gis, iba, cst, sst, c.Duration("duration"))
+				res := p2pubapi.WaitDataStorage(api, gis, storage, cst, sst, c.Duration("duration"))
 				return res
 			},
 		},
