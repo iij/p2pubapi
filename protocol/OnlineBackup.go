@@ -7,9 +7,9 @@ import (
 // OnlineBackup オンラインバックアップ (非同期)
 //  http://manual.iij.jp/p2/pubapi/152684064.html
 type OnlineBackup struct {
-	GisServiceCode     string `json:"-"`          // P2契約のサービスコード(gis########)
-	StorageServiceCode string `json:"-"`          // ストレージのサービスコード(ica########)
-	Label              string `json:",omitempty"` // ラベル
+	GisServiceCode     string `json:"-"` // P2契約のサービスコード(gis########)
+	StorageServiceCode string `json:"-"` // ストレージのサービスコード(ica########)
+	Label              string            // ラベル
 }
 
 // URI /{{.GisServiceCode}}/system-storages/{{.StorageServiceCode}}/backup.json
