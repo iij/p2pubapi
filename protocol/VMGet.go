@@ -62,7 +62,7 @@ type VMGetResponse struct {
 		OSType      string `json:",omitempty"` // OS種別(None/Windows/Linux)
 		URI         string `json:",omitempty"` // ストレージの情報へアクセスするためのURI(URI)
 		Type        string `json:",omitempty"` // ストレージ品目
-		Mode        string `json:",omitempty"` // ストレージのモード ("Basic", "Backup")
+		Mode        string `json:",omitempty"` // ストレージのモード ("Basic", "Backup", "Master", "Clone")
 		Encryption  string `json:",omitempty"` // 暗号化 ("Yes", "No")
 	} `json:",omitempty"`
 	NetworkList []struct {
