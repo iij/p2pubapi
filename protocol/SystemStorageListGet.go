@@ -62,7 +62,9 @@ type SystemStorageListGetResponse struct {
 		ContractStatus string `json:",omitempty"` // 契約状態
 		StopDate       string `json:",omitempty"` // 解約予定日(YYYYMMDD)
 		Type           string `json:",omitempty"` // システムストレージ品目
-		Mode           string `json:",omitempty"` // ストレージのモード ("Basic", "Backup")
+		Mode           string `json:",omitempty"` // ストレージのモード ("Basic", "Backup", "Master", "Clone")
 		Encryption     string `json:",omitempty"` // 暗号化 ("Yes", "No")
+		SourceServiceCode         string `json:",omitempty"` // インスタントクローニングのクローン元ストレージのサービスコード
+		DestinationServiceCodes []string `json:",omitempty"` // インスタントクローニングのクローン先ストレージのサービスコード
 	}
 }
