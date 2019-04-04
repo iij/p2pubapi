@@ -8,7 +8,7 @@ import (
 //  http://manual.iij.jp/p2/pubapi/59939812.html
 type SystemStorageAdd struct {
 	GisServiceCode    string `json:"-"`          // P2契約のサービスコード(gis########)
-	Encryption        string `json:",omitempty"` // 暗号化 ("Yes", "No")
+	Encryption        string // 暗号化 ("Yes", "No")
 	StorageGroup      string `json:",omitempty"` // ストレージグループ。省略時はどちらかのグループへ自動的に割り当てられます(Z/Y)
 	Type              string // ストレージ品目
 	ImageId           string `json:",omitempty"` // 利用するイメージのイメージID
