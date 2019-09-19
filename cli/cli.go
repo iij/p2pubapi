@@ -13,7 +13,7 @@ import (
 
 	yaml "gopkg.in/yaml.v2"
 
-	log "github.com/Sirupsen/logrus"
+	log "github.com/sirupsen/logrus"
 	"github.com/mattn/go-shellwords"
 
 	"github.com/iij/p2pubapi"

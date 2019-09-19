@@ -8,7 +8,7 @@ import (
 	"strings"
 	"text/tabwriter"
 
-	log "github.com/Sirupsen/logrus"
+	log "github.com/sirupsen/logrus"
 
 	"github.com/urfave/cli"
 

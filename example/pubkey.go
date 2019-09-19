@@ -13,7 +13,7 @@ import (
 	"github.com/iij/p2pubapi"
 	"github.com/iij/p2pubapi/protocol"
 
-	log "github.com/Sirupsen/logrus"
+	log "github.com/sirupsen/logrus"
 	"github.com/urfave/cli"
 )
 
