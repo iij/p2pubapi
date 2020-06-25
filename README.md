@@ -18,6 +18,7 @@ GISSERVICECODE=<YOUR GIS SERVICE CODE>
 # . ./setup.sh
 # p2pub VMListGet
 {... (result json)}
+# p2pub VMGet --IvmServiceCode=ivm12345678
 # p2pub --format yaml VMListGet
 (result YAML)
 ```
