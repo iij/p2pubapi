@@ -83,6 +83,8 @@ type FwLbGetResponse struct {
 			IPv4Address string `json:",omitempty"` // InternalインターフェイスのIPv4アドレス(IPv4アドレス)
 		} `json:",omitempty"`
 		LbSoftwareVersion string `json:",omitempty"` // LBソフトウェアバージョン(例： 9.9)
+        LbApiEndpointUrl  string `json:",omitempty"`
+        LbApiVersion      string `json:",omitempty"`
 	} `json:",omitempty"`
 	External struct {
 		NetworkType string `json:",omitempty"` // ネットワーク種別
