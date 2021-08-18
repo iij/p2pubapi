@@ -10,12 +10,11 @@ type GlobalAddressRelease struct {
 	GisServiceCode string `json:"-"` // P2契約のサービスコード(gis########)
 	IvmServiceCode string `json:"-"` // 仮想サーバのサービスコード(ivm########)
 	IPv4Address    string `json:"-"` // IPv4アドレス
-	IPv            string `json:"-"` // IPv
 }
 
-// URI /{{.GisServiceCode}}/virtual-servers/{{.IvmServiceCode}}/global-ipaddresses/{{.IPv}}4Address.json
+// URI /{{.GisServiceCode}}/virtual-servers/{{.IvmServiceCode}}/global-ipaddresses/{{.IPv4Address}}.json
 func (t GlobalAddressRelease) URI() string {
-	return "/{{.GisServiceCode}}/virtual-servers/{{.IvmServiceCode}}/global-ipaddresses/{{.IPv}}4Address.json"
+	return "/{{.GisServiceCode}}/virtual-servers/{{.IvmServiceCode}}/global-ipaddresses/{{.IPv4Address}}.json"
 }
 
 // APIName GlobalAddressRelease
