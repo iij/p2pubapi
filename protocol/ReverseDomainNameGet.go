@@ -9,12 +9,11 @@ import (
 type ReverseDomainNameGet struct {
 	GisServiceCode string `json:"-"` // P2契約のサービスコード(gis########)
 	IPv4Address    string `json:"-"` // 割り当てられたIPv4アドレス(IPv4アドレス)
-	IPv            string `json:"-"` // IPv
 }
 
-// URI /{{.GisServiceCode}}/global-network/{{.IPv}}4Address/name.json
+// URI /{{.GisServiceCode}}/global-network/{{.IPv4Address}}/name.json
 func (t ReverseDomainNameGet) URI() string {
-	return "/{{.GisServiceCode}}/global-network/{{.IPv}}4Address/name.json"
+	return "/{{.GisServiceCode}}/global-network/{{.IPv4Address}}/name.json"
 }
 
 // APIName ReverseDomainNameGet
