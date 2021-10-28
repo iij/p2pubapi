@@ -41,13 +41,13 @@ func init() {
 	TypeMap["ReverseDomainNameSet"] = reflect.TypeOf(ReverseDomainNameSet{})
 }
 
-// ReverseDomainNameSetResponse 逆引きドメイン名取得のレスポンス
+// ReverseDomainNameSetResponse 逆引きドメイン名設定のレスポンス
 type ReverseDomainNameSetResponse struct {
 	*CommonResponse
 	Current struct {
-		Label string `json:",omitempty"` // 設定した逆引きドメイン名
+		DomainName string `json:",omitempty"` // 設定した逆引きドメイン名
 	} `json:",omitempty"`
 	Previous struct {
-		Label string `json:",omitempty"` // 設定前の逆引きドメイン名
+		DomainName string `json:",omitempty"` // 設定前の逆引きドメイン名
 	} `json:",omitempty"`
 }
